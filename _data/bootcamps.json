@@ -11,7 +11,8 @@
     "careers": ["Web Development", "UI/UX", "Business"],
     "housing": true,
     "jobAssistance": true,
-    "jobGuaraCost": 10000
+    "jobGuarantee": true,
+    "acceptGi": true
   },
   {
     "_id": "5d713a66ec8f2b88b8f830b8",
@@ -26,8 +27,7 @@
     "housing": false,
     "jobAssistance": true,
     "jobGuarantee": false,
-    "acceptGi": true,
-    "averageCost": 12000
+    "acceptGi": true
   },
   {
     "_id": "5d725a037b292f5f8ceff787",
@@ -42,8 +42,7 @@
     "housing": false,
     "jobAssistance": false,
     "jobGuarantee": false,
-    "acceptGi": false,
-    "averageCost": 15000
+    "acceptGi": false
   },
   {
     "_id": "5d725a1b7b292f5f8ceff788",
@@ -63,7 +62,6 @@
     "housing": false,
     "jobAssistance": true,
     "jobGuarantee": true,
-    "acceptGi": true,
-    "averageCost": 6000
+    "acceptGi": true
   }
 ]
