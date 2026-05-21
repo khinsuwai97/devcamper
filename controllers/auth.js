@@ -25,6 +25,9 @@ const sendTokenResponse = (user, statusCode, res) => {
   });
 };
 
+// @desc      Register user
+// @route     POST /api/v1/auth/register
+// @access    Public
 exports.register = asyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
 
@@ -39,6 +42,10 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   sendTokenResponse(user, 200, res);
 });
+
+// @desc      Login user
+// @route     POST /api/v1/auth/login
+// @access    Public
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -65,6 +72,9 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
+// @desc      Get current logged in user
+// @route     GET /api/v1/auth/me
+// @access    Private
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
@@ -73,6 +83,10 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     data: user,
   });
 });
+
+// @desc      Forgot password
+// @route     POST /api/v1/auth/forgotpassword
+// @access    Public
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
@@ -165,7 +179,6 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
   });
 });
 
-// update password
 // @desc      Update password
 // @route     PUT /api/v1/auth/updatepassword
 // @access    Private

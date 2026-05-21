@@ -21,6 +21,9 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
   }
 });
 
+// @desc      Get single course
+// @route     GET /api/v1/courses/:id
+// @access    Public
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate({
     path: "bootcamp",
@@ -35,6 +38,9 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: course });
 });
 
+// @desc      Add course
+// @route     POST /api/v1/bootcamps/:bootcampId/courses
+// @access    Private
 exports.addCourse = asyncHandler(async (req, res, next) => {
   req.body.bootcamp = req.params.bootcampId;
   req.body.user = req.user.id;
@@ -65,6 +71,9 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
     data: course,
   });
 });
+// @desc      Update course
+// @route     PUT /api/v1/courses/:id
+// @access    Private
 exports.updateCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -90,6 +99,9 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc      Delete course
+// @route     DELETE /api/v1/courses/:id
+// @access    Private
 exports.deleteCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id);
 
