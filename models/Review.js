@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const sanitizeXSS = require("../utils/sanitizeXSS");
 
 const ReviewSchema = new mongoose.Schema({
   title: {
@@ -6,10 +7,12 @@ const ReviewSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Please add a title for the review"],
     maxlength: 100,
+    set: sanitizeXSS,
   },
   text: {
     type: String,
     required: [true, "Please add some text"],
+    set: sanitizeXSS,
   },
   rating: {
     type: Number,

@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
+const sanitizeXSS = require("../utils/sanitizeXSS");
 
 const CourseSchema = new mongoose.Schema({
   title: {
     type: String,
     trim: true,
     required: [true, "Please add a course title"],
+    set: sanitizeXSS,
   },
   description: {
     type: String,
     required: [true, "Please add a description"],
+    set: sanitizeXSS,
   },
   weeks: {
     type: String,
