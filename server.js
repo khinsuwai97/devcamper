@@ -47,7 +47,10 @@ app.use(helmet());
 // Prevent http param pollution
 app.use(hpp());
 // Enable CORS
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
+}));
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 mins
