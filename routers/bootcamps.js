@@ -3,6 +3,7 @@ const express = require("express");
 const {
   getBootcamps,
   getBootcamp,
+  getMyBootcamp,
   createBootcamp,
   updateBootcamp,
   deleteBootcamp,
@@ -20,6 +21,8 @@ const Bootcamp = require("../models/Bootcamp");
 // Re-route into other resource routers
 router.use("/:bootcampId/courses", courseRouter);
 router.use("/:bootcampId/reviews", reviewRouter);
+
+router.route("/me").get(protect, authorize("publisher", "admin"), getMyBootcamp);
 
 router
   .route("/")

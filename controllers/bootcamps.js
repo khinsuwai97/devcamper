@@ -4,6 +4,17 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const geocoder = require("../utils/geocoder");
 
+// @desc      Get the bootcamp owned by the logged-in publisher
+// @route     GET /api/v1/bootcamps/me
+// @access    Private (publisher, admin)
+exports.getMyBootcamp = asyncHandler(async (req, res, next) => {
+  const bootcamp = await Bootcamp.findOne({ user: req.user.id });
+  if (!bootcamp) {
+    return next(new ErrorResponse("You have not created a bootcamp yet", 404));
+  }
+  res.status(200).json({ success: true, data: bootcamp });
+});
+
 // @desc      Get all bootcamps
 // @route     GET /api/v1/bootcamps
 // @access    Public
