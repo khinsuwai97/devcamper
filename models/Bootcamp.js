@@ -123,10 +123,12 @@ BootcampSchema.pre("save", function () {
 BootcampSchema.pre("save", async function () {
   const loc = await geocoder.geocode(this.address);
   const city = loc[0].city || loc[0].county;
+  const stateZip = [loc[0].state, loc[0].zipcode].filter(Boolean).join(" ");
+  const parts = [loc[0].streetName, city, stateZip, loc[0].countryCode].filter(Boolean);
   this.location = {
     type: "Point",
     coordinates: [loc[0].longitude, loc[0].latitude],
-    formattedAddress: `${loc[0].streetName}, ${city}, ${loc[0].state} ${loc[0].zipcode}, ${loc[0].country}`,
+    formattedAddress: parts.join(", "),
     street: loc[0].streetName,
     city,
     state: loc[0].state,

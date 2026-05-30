@@ -43,7 +43,9 @@ app.use((req, res, next) => {
   next();
 });
 // Set security headers
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+}));
 // Prevent http param pollution
 app.use(hpp());
 // Enable CORS

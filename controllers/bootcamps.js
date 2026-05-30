@@ -73,7 +73,14 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
     );
   }
 
-  bootcamp = await Bootcamp.findOneAndUpdate(req.params.id, req.body, {
+  // If address changed, re-geocode via save() so the pre-save hook runs
+  if (req.body.address) {
+    Object.assign(bootcamp, req.body);
+    await bootcamp.save();
+    return res.status(200).json({ success: true, data: bootcamp });
+  }
+
+  bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
