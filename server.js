@@ -50,8 +50,16 @@ app.use(helmet({
 // Prevent http param pollution
 app.use(hpp());
 // Enable CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5001',
+  process.env.CLIENT_URL,
+].filter(Boolean);
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 // Rate limiting
