@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 // Set security headers
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" },
+  contentSecurityPolicy: false,
 }));
 // Prevent http param pollution
 app.use(hpp());
